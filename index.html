@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Plataforma SEAB</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#d25d2a">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: #1a202c; }
+        iframe { width: 100vw; height: 100vh; border: none; display: block; }
+    </style>
+</head>
+<body>
+    <iframe src="https://script.google.com/macros/s/AKfycbwVPQCBFhEmaMqkL6OuuphFQixeC_3iVJGP_oJ-rihCUS36INXRnOcqxodRRDbn8ibW/exec"></iframe>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js')
+                .then(reg => console.log('Service Worker OK', reg))
+                .catch(err => console.log('Error SW', err));
+        }
+    </script>
+</body>
+</html>
