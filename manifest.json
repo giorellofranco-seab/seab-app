@@ -1,11 +1,11 @@
 {
-  "name": "Plataforma SEAB",
+  "name": "SEAB App",
   "short_name": "SEAB",
-  "start_url": "./index.html",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#1a202c",
   "theme_color": "#d25d2a",
-  "orientation": "landscape", 
+  "orientation": "portrait",
   "icons": [
     {
       "src": "icons/icon-192.png",
