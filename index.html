@@ -18,18 +18,18 @@
         padding: 0; 
         width: 100%;
         height: 100%; 
-        overflow: hidden; /* Bloqueamos scroll del body para que scrollee el iframe */
+        overflow: hidden; /* Bloqueamos scroll del body */
         background-color: #1a202c; 
-        position: fixed; /* Esto evita que el body 'rebote' en iPhone/Android */
+        position: fixed; /* Evita rebote */
     }
     
-    /* El Iframe (Tu App) - SOLUCIÓN NUCLEAR + SCROLL FIX */
+    /* El Iframe (Tu App) */
     iframe {
-        position: absolute; /* Lo sacamos del flujo normal (Nuclear Fix) */
+        position: absolute; 
         top: 0;
         left: 0;
         right: 0;
-        bottom: 0; /* Lo anclamos al fondo VISIBLE */
+        bottom: 0; 
         width: 100%;
         height: 100%; 
         border: none;
@@ -37,10 +37,10 @@
         opacity: 0;
         transition: opacity 1s ease-in;
         z-index: 10;
-        /* --- AQUÍ ESTÁ EL CAMBIO PARA EL SCROLL --- */
-        overflow-y: auto;   /* Permite bajar si falta espacio (Login) */
-        overflow-x: hidden; /* Prohíbe mover hacia los lados */
-        -webkit-overflow-scrolling: touch; /* Suavidad en móviles */
+        /* SCROLL FIX */
+        overflow-y: auto;   
+        overflow-x: hidden; 
+        -webkit-overflow-scrolling: touch; 
     }
 
     /* Estilos para el Splash Screen (Cargando...) */
@@ -51,12 +51,20 @@
         width: 100%;
         height: 100%;
         background-color: #1a202c;
+        /* FLEXBOX PARA CENTRAR */
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        justify-content: center; /* Centrado Vertical */
+        align-items: center;     /* Centrado Horizontal */
         z-index: 20;
-        transition: opacity 0.5s ease-out;
+        transition: opacity 0.5s ease-out, visibility 0.5s;
+    }
+
+    /* Clase para ocultar el Splash (FALTABA ESTA) */
+    .hidden-splash {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
     }
 
     /* Logo pulsante */
@@ -86,9 +94,9 @@
 </head>
 <body>
 
-    <div id="splash-screen">
+    <div id="splash-screen" class="splash-screen">
         <img src="icons/icon-192.png" alt="SEAB Logo" class="splash-logo">
-        <div class="loading-text">Cargando Sistema...</div>
+        <div class="splash-text">Cargando Sistema...</div>
     </div>
 
     <iframe 
@@ -110,14 +118,13 @@
 
         // Cuando el iframe termina de cargar lo básico...
         iframe.onload = function() {
-            // Esperamos un poquito más (2 segundos) para asegurar que GAS renderice
             setTimeout(() => {
                 splash.classList.add('hidden-splash'); // Ocultar splash
                 iframe.style.opacity = '1';            // Mostrar App
             }, 2500); 
         };
 
-        // Fallback de seguridad: Si por alguna razón onload falla, quitar splash a los 8 segs
+        // Fallback de seguridad
         setTimeout(() => {
             splash.classList.add('hidden-splash');
             iframe.style.opacity = '1';
@@ -125,8 +132,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
