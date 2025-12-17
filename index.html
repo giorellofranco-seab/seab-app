@@ -17,81 +17,72 @@
         margin: 0; 
         padding: 0; 
         width: 100%;
-        height: 100%; /* Usamos 100% simple aquí */
+        height: 100%; 
         overflow: hidden; /* Bloqueamos scroll del body para que scrollee el iframe */
         background-color: #1a202c; 
         position: fixed; /* Esto evita que el body 'rebote' en iPhone/Android */
     }
     
-    /* El Iframe (Tu App) - SOLUCIÓN NUCLEAR */
+    /* El Iframe (Tu App) - SOLUCIÓN NUCLEAR + SCROLL FIX */
     iframe {
-        position: absolute; /* Lo sacamos del flujo normal */
+        position: absolute; /* Lo sacamos del flujo normal (Nuclear Fix) */
         top: 0;
         left: 0;
         right: 0;
         bottom: 0; /* Lo anclamos al fondo VISIBLE */
         width: 100%;
-        height: 100%; /* Ocupará todo el espacio entre top y bottom */
+        height: 100%; 
         border: none;
         display: block;
         opacity: 0;
         transition: opacity 1s ease-in;
         z-index: 10;
+        /* --- AQUÍ ESTÁ EL CAMBIO PARA EL SCROLL --- */
+        overflow-y: auto;   /* Permite bajar si falta espacio (Login) */
+        overflow-x: hidden; /* Prohíbe mover hacia los lados */
+        -webkit-overflow-scrolling: touch; /* Suavidad en móviles */
     }
 
-        /* --- PANTALLA DE CARGA (SPLASH SCREEN) --- */
-        #splash-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.8s ease-out, visibility 0.8s;
-        }
+    /* Estilos para el Splash Screen (Cargando...) */
+    .splash-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #1a202c;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 20;
+        transition: opacity 0.5s ease-out;
+    }
 
-        /* Animación del Logo */
-        .splash-logo {
-            width: 150px;
-            height: 150px;
-            object-fit: contain;
-            animation: palpitar 2s infinite ease-in-out;
-            margin-bottom: 20px;
-        }
+    /* Logo pulsante */
+    .splash-logo {
+        width: 120px; 
+        height: auto;
+        margin-bottom: 20px;
+        animation: pulse 2s infinite;
+    }
 
-        /* Texto de carga */
-        .loading-text {
-            font-family: sans-serif;
-            color: #a0aec0;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            animation: parpadear 1.5s infinite;
-        }
+    /* Texto de carga */
+    .splash-text {
+        font-family: 'Arial', sans-serif;
+        color: #ffffff;
+        font-size: 14px;
+        letter-spacing: 2px;
+        font-weight: bold;
+    }
 
-        /* Animaciones */
-        @keyframes palpitar {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.05); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        @keyframes parpadear {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        /* Clase para ocultar el splash */
-        .hidden-splash {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-    </style>
+    /* Animación de pulso */
+    @keyframes pulse {
+        0% { transform: scale(0.95); opacity: 0.8; }
+        50% { transform: scale(1.05); opacity: 1; }
+        100% { transform: scale(0.95); opacity: 0.8; }
+    }
+</style>
 </head>
 <body>
 
@@ -134,6 +125,7 @@
     </script>
 </body>
 </html>
+
 
 
 
