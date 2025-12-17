@@ -11,17 +11,25 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <style>
-        /* Estilos base */
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: #1a202c; }
+   <style>
+        /* Estilos base con corrección para móviles */
+        body, html { 
+            margin: 0; 
+            padding: 0; 
+            /* Usamos dvh para que respete las barras del navegador */
+            height: 100dvh; 
+            width: 100%;
+            overflow: hidden; /* Evita doble barra de scroll */
+            background-color: #1a202c; 
+        }
         
         /* El Iframe (Tu App) */
         iframe {
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            /* Altura dinámica real */
+            height: 100dvh; 
             border: none;
             display: block;
-            /* Oculto al principio para que no se vea el pantallazo blanco */
             opacity: 0; 
             transition: opacity 1s ease-in;
         }
@@ -121,5 +129,6 @@
     </script>
 </body>
 </html>
+
 
 
